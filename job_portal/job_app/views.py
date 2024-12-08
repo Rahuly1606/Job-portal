@@ -19,7 +19,6 @@ from .forms import ApplicationStatusForm
 
 def job_list1(request):
     jobs = Job.objects.all()
-
     keyword = request.GET.get('job-keyword')
     location = request.GET.get('location')
     job_type = request.GET.get('job-type')
@@ -148,7 +147,7 @@ def job_detail(request, job_id):
     has_applied = False
     is_applicant = False
     has_saved = False
-    is_available = job.availability and job.vacancy_limit > job.application_set.count()  # Check if job is available
+    is_available = job.availability and job.vacancy_seats > job.application_set.count()  # Check if job is available
 
     if applicant_id:
         try:
@@ -233,7 +232,7 @@ class ManageJobsView(LoginRequiredMixin, View):  # Ensure the user is logged in
         # Prepare job data with remaining vacancies
         job_data = []
         for job in jobs:
-            remaining_vacancies = job.vacancy_limit - job.application_set.count()
+            remaining_vacancies = job.vacancy_seats - job.application_set.count()
             job_data.append({
                 'job': job,
                 'remaining_vacancies': remaining_vacancies
@@ -337,8 +336,12 @@ class UpdateVacancyView(View):
 
         try:
             job = Job.objects.get(id=job_id)
-            job.vacancy_limit = new_vacancy
+            job.vacancy_seats = new_vacancy
             job.save()
             return JsonResponse({'message': 'Vacancy updated successfully!'})
         except Job.DoesNotExist:
             return JsonResponse({'message': 'Job not found!'}, status=404)
+
+
+def aboutus(request):
+    return render(request,'AboutUs.html')

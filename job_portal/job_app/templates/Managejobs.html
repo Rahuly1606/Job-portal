@@ -236,7 +236,7 @@
                             <a href="{% url 'job_applicants' job_data.job.id %}">view All</a>
                         </td>
                         <td>
-                            {{ job_data.job.vacancy_limit }}
+                            {{ job_data.job.vacancy_seats }}
                             <a href="javascript:void(0);" onclick="openModal({{ job_data.job.id }})" class="adjust-vacancy"><i class="fas fa-plus"></i></a>
                         </td>
                         <td>{{ job_data.remaining_vacancies }}</td>

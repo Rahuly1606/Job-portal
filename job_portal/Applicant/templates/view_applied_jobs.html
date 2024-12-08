@@ -94,6 +94,9 @@
         .status.review {
             background-color: #6783a3; /* Blue for review */
         }
+        .status.accepted {
+            background-color:#28a745;
+        }
 
         .view-details {
             color: #718fb6;
@@ -119,6 +122,53 @@
             color: #333; /* Dark text color */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
+        @media (max-width: 500px) {
+        body {
+            font-size: 14px; /* Smaller font size for better readability */
+            /*padding: 0 10px; !* Add padding for spacing on small screens *!*/
+        }
+
+        .container {
+            width: 90%; /* Adjust the container width to fit smaller screens */
+            margin: 30px auto; /* Reduce margin for smaller devices */
+        }
+
+        .job-card {
+            padding: 15px; /* Reduce padding for compact design */
+            margin-bottom: 15px; /* Reduce margin between cards */
+        }
+
+        .job-title {
+            font-size: 16px; /* Adjust font size for smaller screens */
+        }
+
+        .job-details {
+            font-size: 12px; /* Smaller text size for details */
+        }
+
+        .status {
+            font-size: 10px; /* Smaller text for status labels */
+        }
+
+        .view-details {
+            font-size: 12px; /* Smaller font for links */
+        }
+
+        .cancel-button {
+            font-size: 8px; /* Reduce button font size */
+            padding: 5px 10px; /* Adjust padding for smaller buttons */
+        }
+
+        h2 {
+            font-size: 24px; /* Reduce header size */
+            margin-top: 84px; /* Adjust top margin */
+        }
+
+        .time {
+            font-size: 12px; /* Adjust time block text size */
+            padding: 8px; /* Reduce padding */
+        }
+    }
     </style>
 </head>
 <body>
@@ -136,13 +186,20 @@
                     {% elif application.get_status_display == "Rejected" %}rejected
                     {% elif application.get_status_display == "Interview" %}interview
                     {% elif application.get_status_display == "Review" %}review
+                    {% elif application.get_status_display == "Accepted" %}accepted
                     {% endif %}">
                     {{ application.get_status_display }}
                 </span>
             </p>
             {% if application.status == 'interview' %}
             <div class="time">
-                <p>Your Interview Scheduled At: <strong>{{ application.interview_time }}</strong></p>
+                <p>Your Interview Scheduled At: <strong>
+                    {% if application.overdue %}
+            Interview is <strong>overdue</strong> by <strong>{{ application.overdue_reference_time|timesince }}</strong>.
+            {% else %}
+            {{ application.interview_time }}
+            {% endif %}
+                </strong></p>
             </div>
             {% endif %}
             <a href="{% url 'job_detail' application.job.id %}" class="view-details">View Details</a>

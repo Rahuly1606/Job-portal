@@ -188,78 +188,98 @@
         .footer-links a:hover {
             color: #f0a1a1;
         }
-         @media (max-width: 768px) {
-        header {
-            flex-direction: column;
-            height: auto;
-            padding: 10px 20px;
-        }
-
-        .logo a {
-            font-size: 1.5em;
-        }
-
-        header ul {
-            flex-direction: column;
-            width: 100%;
-            padding-top: 10px;
-        }
-
-        li {
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        .hamburger-icon {
-            display: block;
-        }
-
-        .notification-icon {
-            margin-top: 10px;
-        }
-
-        .user-info {
-            justify-content: center;
-            margin-top: 10px;
-        }
-    }
        @media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        height: 120px;
-    }
-
-           header ul li{
-               margin: 0 9px;
-           }
-
-    header ul {
+   header {
         flex-direction: row;
-    }
-
-    .footer-links a {
-        font-size: 1.2em;
-    }
-}
-
-@media (max-width: 480px) {
-
-    .container h1 {
-        font-size: 1.5em;
-    }
-
-    .container p,
-    .container button,
-    .footer-links a,
-    .contact-details p {
-        font-size: 0.9em;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        height: 60px;
     }
 
     .logo a {
-        font-size: 1.5em;
+        font-size: 1.2em;
+        text-align: left;
+    }
+
+    header ul li {
+        display: none; /* Hide navigation items */
+    }
+
+    header ul.active li {
+        display: block; /* Show when toggled */
+    }
+
+    .logo, .user-info, .hamburger-icon {
+        display: block;
+    }
+
+    .user-info {
+        color: white;
+        font-weight: bold;
+        margin-left: auto;
+        font-size: 0.9em;
+    }
+
+    .user-info img {
+        display: none; /* Hide profile image on small screens */
+    }
+
+    .offcanvas {
+        width: 250px;
+    }
+
+    .offcanvas h3, .offcanvas h5, .offcanvas a {
+        font-size: 0.9em;
     }
 }
 
+/* Media query for screens up to 500px (Mobile phones) */
+@media (max-width: 500px) {
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        height: 60px;
+    }
+
+    .logo a {
+        font-size: 1.2em;
+        text-align: left;
+    }
+
+    header ul li {
+        display: none; /* Hide navigation items */
+    }
+
+    header ul.active li {
+        display: block; /* Show when toggled */
+    }
+
+    .logo, .user-info, .hamburger-icon {
+        display: block;
+    }
+
+    .user-info {
+        color: white;
+        font-weight: bold;
+        margin-left: auto;
+        font-size: 0.9em;
+    }
+
+    .user-info img {
+        display: none; /* Hide profile image on small screens */
+    }
+
+    .offcanvas {
+        width: 250px;
+    }
+
+    .offcanvas h3, .offcanvas h5, .offcanvas a {
+        font-size: 0.9em;
+    }
+}
 
     </style>
 </head>
@@ -299,9 +319,12 @@
         {% endif %}
     </div>
     <a href="#">About Us</a>
+    <a href="{% url 'additional_details' %}">Profile</a>
     <a href="{% url 'saved_jobs' %}">Saved jobs</a>
+    <a id="apply_jobs" href="{% url 'Alljobs' %}">Apply Jobs</a>
+    <a href="{% url 'view_applied_jobs' %}">Applied Jobs</a>
     <a href="{{ applicant.resume_set.first.resume_file.url }}">My Resume</a>
-    <a href="#">Settings</a>
+
     <a href="{% url 'logout' %}">Logout <i class="fas fa-sign-out-alt logout-icon"></i></a>
 </div>
 <!--<div class="pop">-->

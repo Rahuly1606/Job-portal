@@ -4,10 +4,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Portal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     {% load static %}
     <style>
+        /* General Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+        }
+
         /* Statistics Section */
         .statistics {
             display: flex;
@@ -17,15 +30,26 @@
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .statistics:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
 
         .stat-box {
             text-align: center;
+            flex: 1;
+            padding: 15px;
+            transition: all 0.3s ease;
         }
 
         .stat-box h3 {
             color: #8e7575;
             font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
 
         .stat-box p {
@@ -33,99 +57,50 @@
             font-size: 16px;
         }
 
-        /* Footer */
-        footer {
-            background-color: #8e7575;
-            margin-top: 500px;
-            color: white;
-            text-align: center;
+        /* Job Cards Section */
+        .job-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 20px;
-            box-shadow: 0 -6px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 600px;
+            margin: 50px auto;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .footer-links a {
-            color: white;
-            font-size: 1.5em;
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #f0a1a1;
-        }
-
-        .contact-details {
-            font-size: 0.9em;
-        }
-
-        .footer-copy {
-            font-size: 0.8em;
-            margin-top: 10px;
-        }
-        @media (max-width: 768px) {
-            .statistics {
-                flex-direction: column;
-                align-items: center;
-                margin: 70px 10px;
-                padding: 15px;
-            }
-
-            .stat-box h3 {
-                font-size: 24px;
-            }
-
-            .stat-box p {
-                font-size: 14px;
-            }
-
-            .footer-links a {
-                font-size: 1.2em;
-                margin: 0 8px;
-            }
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
 
         .job-card h3 {
             text-align: center;
-            width: 100%;
-
             color: #4a2e2e;
-
             font-weight: bold;
-            font-size: 20px;
-            text-transform: uppercase;
-
-            border-radius: 5px;
+            font-size: 22px;
+            margin-bottom: 10px;
         }
-
-        .job-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-             margin: 50px auto;
-
-}
 
         .job-title {
             font-size: 18px;
             font-weight: bold;
             color: #333;
-            margin: 0;
+            margin: 10px 0;
         }
 
         .job-details {
             color: #666;
-            margin: 5px 0 10px;
             font-size: 14px;
+            margin-bottom: 15px;
         }
 
         /* Status background colors */
         .status {
-            padding: 2px 6px;
+            padding: 4px 8px;
             border-radius: 4px;
             font-weight: bold;
             color: #fff;
@@ -155,24 +130,87 @@
             align-self: flex-end;
             position: relative;
             top: 9px;
+            transition: color 0.3s ease;
         }
 
         .view-details:hover {
+            color: #f0a1a1;
             text-decoration: underline;
         }
 
+        /* Time block */
         .time {
-            background-color: #e7f3fe; /* Light blue background */
-            border-left: 5px solid #2196F3; /* Blue left border */
-            padding: 10px; /* Padding for spacing */
-            border-radius: 4px; /* Slightly rounded corners */
-            margin-top: 10px; /* Space above the time block */
-            font-size: 14px; /* Font size */
-            color: #333; /* Dark text color */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            background-color: #e7f3fe;
+            border-left: 5px solid #2196F3;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        @media (max-width: 400px) {
+        /* Footer */
+        footer {
+            background-color: #8e7575;
+            margin-top: 293px;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0 -6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer-links a {
+            color: white;
+            font-size: 1.5em;
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #f0a1a1;
+        }
+
+        .contact-details {
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        .footer-copy {
+            font-size: 0.8em;
+            margin-top: 10px;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            .statistics {
+                flex-direction: column;
+                align-items: center;
+                margin: 20px 10px;
+                padding: 15px;
+            }
+
+            .stat-box h3 {
+                font-size: 24px;
+            }
+
+            .stat-box p {
+                font-size: 14px;
+            }
+
+            .footer-links a {
+                font-size: 1.2em;
+                margin: 0 8px;
+            }
+
+            .job-card {
+                width: 90%;
+                margin: 30px auto;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 500px) {
             .statistics {
                 margin-top: 80px;
                 padding: 10px;
@@ -193,6 +231,9 @@
 
             .contact-details, .footer-copy {
                 font-size: 0.7em;
+            }
+            footer {
+                margin-top:115px;
             }
         }
     </style>
@@ -234,7 +275,13 @@
             Status: <span class="status interview">{{ interview.get_status_display }}</span>
         </p>
         <div class="time">
-            <p>Your Interview Scheduled At: <strong>{{ interview.interview_time }}</strong></p>
+            <p>Your Interview Scheduled At: <strong>
+                {% if interview.overdue %}
+            Interview is <strong>overdue</strong> by <strong>{{ interview.overdue_reference_time|timesince }}</strong>.
+            {% else %}
+            {{ interview.interview_time }}
+            {% endif %}
+            </strong></p>
         </div>
         <a href="{% url 'job_detail' interview.job.id %}" class="view-details">View Details</a>
     </div>

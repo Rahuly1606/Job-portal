@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
-from rest_framework.authtoken.admin import User
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -44,7 +44,7 @@ class Job(models.Model):
     requirements = models.TextField()
     ideal_candidate = models.TextField(default='N/A')
     availability = models.BooleanField(default=True)
-    vacancy_limit = models.IntegerField(default=0)  # Maximum number of positions
+    vacancy_seats = models.IntegerField(default=0)  # Maximum number of positions
     filled_vacancies = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)

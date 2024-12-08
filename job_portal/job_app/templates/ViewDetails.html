@@ -16,7 +16,7 @@
     font-family: Arial, sans-serif;
     background-color: #f4f1f1;
     padding-top: 60px;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     overflow: hidden; /* Prevent default scrollbars */
@@ -54,7 +54,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 20px;
-            box-shadow: 0 6px 5px rgba(0, 0, 0, 0.2);
+            box-shadow: 2px 8px 8px #554f4f;
             z-index: 1000;
             transition: background-color 0.3s;
         }
@@ -195,6 +195,7 @@
             padding: 10px 20px;
             font-size: 1rem;
             background-color: #8e7575;
+            box-shadow: 2px 8px 8px #554f4f;
             color: white;
             border: none;
             border-radius: 5px;
@@ -293,19 +294,50 @@
         .apply-btn {
             width: 100%;
             font-size: 0.9rem;
+            box-shadow: 2px 8px 8px #554f4f;
             padding: 8px;
         }
     }
 
-    @media (max-width: 500px) {
+     @media (max-width: 500px) {
+        body {
+            overflow-y: auto; /* Enable vertical scrolling */
+            overflow-x: hidden; /* Prevent horizontal overflow */
+        }
         header {
+            display: flex; /* Use flexbox */
+            flex-direction: row; /* Align elements in a row */
+            justify-content: space-between; /* Space between logo and login */
+            align-items: center;
             height: auto;
+            padding: 0 20px;
+            box-shadow: 2px 8px 8px #554f4f;
+        }
+        header ul {
+            display: flex; /* Use flexbox for links */
+            flex-direction: row; /* Arrange links in a row */
+            gap: 10px; /* Add space between links */
+            justify-content: center; /* Center the links */
+        }
+        header li {
+            margin: 0; /* Remove margin between list items */
+        }
+        .container {
+            flex-direction: column;
             padding: 10px;
+            height: auto;
+        }
+        .job-details {
+            padding: 10px;
+            height: auto; /* Allow scrolling */
+            margin-top: 20px;
         }
         .job-header h1 {
-            font-size: 1.5rem;
+            font-size: 1.5rem; /* Adjust font sizes */
         }
-        .job-header p, .section h3, .apply-btn {
+        .job-header p,
+        .section h3,
+        .apply-btn {
             font-size: 0.9rem;
         }
         .bookmark-icon {
@@ -313,31 +345,30 @@
             right: 20px;
         }
         .recommended-jobs {
-            display: none; /* Hide recommended jobs on very small screens */
+            display: none; /* Hide recommended jobs */
         }
         .job-details.full-width {
             flex: 1;
         }
-    }
-
-    @media (max-width: 400px) {
-        .job-header h1 {
-            font-size: 1.2rem;
+        .cards-container {
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 0;
+        }
+        .card {
+            padding: 15px;
         }
         .apply-btn {
-            font-size: 0.8rem;
-            padding: 6px;
-        }
-        .card-footer {
-            font-size: 0.75rem;
-        }
-        .card h5 {
-            font-size: 1rem;
+            width: 100%;
+            font-size: 0.9rem;
+            padding: 8px;
+            box-shadow: 2px 8px 8px #554f4f;
         }
     }
      .job-header a{
          text-decoration: none;
      }
+
     </style>
 </head>
 <body>
@@ -347,9 +378,10 @@
     {% include "header_m.html" %}
 {% else %}
     <header>
+
         <div class="logo"><a href="{% url 'home' %}">Job Portal</a></div>
-        <ul>
-            <li><a id="login" href="{% url 'login' %}">Login</a></li>
+<ul>
+            <li><a class="login" id="login" href="{% url 'login' %}">Login</a></li>
         </ul>
     </header>
 {% endif %}

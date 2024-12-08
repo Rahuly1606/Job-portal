@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     'Applicant.apps.ApplicantConfig',
     'authenticate.apps.AuthenticateConfig',
     'job_app.apps.JobAppConfig',
-    'rest_framework',
-    'rest_framework.authtoken',
+    # 'rest_framework',
+    # 'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,6 +88,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'jo_portal',
+#         'USER':'root',
+#         'PASSWORD':'Rahul@1606',
+#         'HOST':'127.0.0.1',
+#         'PORT':'3306'
+#     }
+# }
 
 
 # Password validation

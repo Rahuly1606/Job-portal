@@ -60,3 +60,26 @@ class SavedJob(models.Model):
     saved_at = models.DateTimeField(auto_now_add=True)
 
 
+from django.db import models
+from django.contrib.auth.models import AbstractUser
+
+
+class Applicant_detail(models.Model):
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    linkedin_profile = models.URLField(blank=True, null=True)
+
+    current_job_title = models.CharField(max_length=100, blank=True, null=True)
+    professional_summary = models.TextField(blank=True, null=True)
+    company_name = models.CharField(max_length=100, blank=True, null=True)
+
+    degree = models.CharField(max_length=100, blank=True, null=True)
+    institution = models.CharField(max_length=200, blank=True, null=True)
+    graduation_date = models.DateField(blank=True, null=True)
+
+    languages_known = models.CharField(max_length=200, blank=True, null=True)
+
+
+
+

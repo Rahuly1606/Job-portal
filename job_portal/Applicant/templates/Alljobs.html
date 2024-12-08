@@ -183,16 +183,9 @@ li a {
     .search input {
         width: 200px;
     }
-
-    header ul {
-        flex-direction: column;
+    .container select{
+        display: none;
     }
-
-    header {
-        flex-direction: column;
-        height: auto;
-    }
-
     .pop {
         bottom: 20px;
         right: 20px;
@@ -326,12 +319,6 @@ form button {
     color: indianred; /* Change color on hover */
 }
 
-
-@media (max-width: 500px) {
-    .container{
-        margin-top: 140px;
-    }
-}
        ::-webkit-scrollbar {
     width: 12px; /* Set the width of the scrollbar */
 }
@@ -355,11 +342,12 @@ form button {
     display: none; /* Hide the scrollbar buttons */
 }
 
+
     </style>
 </head>
 <body>
  <div class="container">
-        <form method="GET" action="{% url 'job_list1' %}">
+        <form method="GET" action="{% url 'Alljobs' %}">
     <input type="text" placeholder="Job Keyword" name="job-keyword">
      <select name="location">
         <option value="">Select Location</option>
